@@ -1,0 +1,59 @@
+* {
+    font-family: Tahoma;
+}
+.logo {
+    color: white !important;
+    font-size: 40px;
+    text-shadow: 3px 3px rgb(101, 204, 70);
+}
+.logo:hover {
+    color: rgb(7, 221, 43) !important;
+    text-shadow: 2px 2px white;
+}
+/* nav {
+ } */
+ul li a {
+    color: white;
+}
+ul li .active {
+    /* background-color: rgba(255, 255, 255, 0.8) !important; */
+    border-bottom: 3px solid rgb(255, 254, 254);
+}
+ul li a:hover {
+    color: rgb(7, 221, 43);
+}
+@media (max-width: 767.98px) {
+    .hero p {
+        color: white !important;
+        font-size: 10px !important;
+        text-shadow: none !important;
+    }
+    table {
+        font-size: 8px !important;
+    }
+    .hero h1 {
+        color: black !important;
+        text-shadow: 2px 2px chocolate !important;
+    }
+    h2 {
+        font-size: 20px !important;
+    }
+}
+.hero {
+    background-color: rgba(159, 173, 147, 0.7);
+    background-image: url("/img/background2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    /*height: 530px; */
+    min-height: 530px;
+}
+.hero h1 {
+    padding-top: 170px;
+    text-shadow: 2px 2px black;
+}
+.hero p {
+    text-shadow: 1px 1px white;
+}
+footer {
+    height: 70px;
+}
