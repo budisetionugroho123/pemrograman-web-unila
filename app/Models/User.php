@@ -22,7 +22,11 @@ class User extends Authenticatable
     //     'email',
     //     'password',
     // ];
-        protected $guarded=['id'];
+    protected $guarded = ['id'];
+    function getJoins()
+    {
+        return $this->hasMany(Joins::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

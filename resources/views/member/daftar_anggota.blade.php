@@ -40,8 +40,8 @@
                                 @endphp</th>
                             <td>{{$user['name']}}</td>
                             <td>{{$user['alamat']}}</td>
-                            <td class="text-center">{{$user['tanggal_lahir']}}</td>
-                            <td class="text-center"><a href="/hapus-anggota/{{$user['id']}}" onclick="return confirm('yakin?')"><i class="fas fa-trash-alt text-danger"></i></a></td>
+                            <td class="text-center">{{ date('d F Y',strtotime($user['tanggal_lahir'])) }}</td>
+                            <td class="text-center"><a class="btn btn-danger" href="/hapus-anggota/{{$user['id']}}" onclick="return confirm('yakin?')"><i class="fas fa-trash-alt "></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>

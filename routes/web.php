@@ -2,11 +2,16 @@
 
 use App\Http\Controllers\AktivitasController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\groupController;
+use App\Http\Controllers\JoinsController;
+use App\Http\Controllers\MemberController;
 use App\Models\Category;
 use App\Models\Todolist;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Models\Group;
+use App\Models\Joins;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,13 +34,18 @@ Route::get('/', function () {
 })->name('login')->middleware('guest');
 Route::get('/beranda', function () {
     if (auth()->user()->role == "admin") {
+        $data = Group::all();
         return view('home.dashboard_admin', [
-            'title' => 'beranda'
+            'title' => 'beranda',
+            'data' => $data
+        ]);
+    } else {
+        $data = Group::all();
+        return view('home.dashboard', [
+            'title' => 'beranda',
+            'data' => $data
         ]);
     }
-    return view('home.dashboard', [
-        'title' => 'beranda'
-    ]);
 })->middleware('auth');
 Route::get('/login', function () {
     return view('auth.login', [
@@ -125,3 +135,25 @@ Route::get('/biodata', function () {
         'data' => $data
     ]);
 });
+Route::post('/update-biodata', [MemberController::class, 'update_biodata'])->middleware('auth');
+
+
+// kegiatan bersama
+Route::post('/tambah-kegiatan-bersama', [groupController::class, 'tambah_kegiatan'])->middleware('is_admin');
+Route::get('/detail-kegiatan-bersama/{id}', function ($id) {
+    $data = Group::where('id', $id)->first();
+    $jumlah = Joins::where('id_group', $id)->get();
+    return view('aktivitas_bersama.detail', [
+        'title' => 'Detail Kegiatan',
+        'data' => $data,
+        'daftar' => $jumlah->count()
+    ]);
+});
+Route::put('/ubah-kegiatan-bersama', [groupController::class, 'ubah_kegiatan'])->middleware('is_admin');
+Route::get('/hapus-kegiatan-bersama/{id}', function ($id) {
+    Group::where('id', $id)->delete();
+    return redirect('/beranda')->with('status', 'Kegiatan berhasil dihapus');
+});
+Route::post('/join-kegiatan', [JoinsController::class, 'join_kegiatan'])->middleware('is_member');
+Route::post('/cancel-kegiatan', [JoinsController::class, 'cancel_kegiatan'])->middleware('is_member');
+// Route::get('/detail-peserta/{id}', [JoinsController::class, 'detail_peserta'])->middleware('is_admin');

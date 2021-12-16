@@ -18,9 +18,14 @@ ul li a {
 ul li .active {
     /* background-color: rgba(255, 255, 255, 0.8) !important; */
     border-bottom: 3px solid rgb(255, 254, 254);
+
+}
+ul li .active:hover{
+    border-bottom: 3px solid rgb(7, 221, 43);
 }
 ul li a:hover {
     color: rgb(7, 221, 43);
+    text-decoration: none;
 }
 @media (max-width: 767.98px) {
     .hero p {
@@ -38,6 +43,7 @@ ul li a:hover {
     h2 {
         font-size: 20px !important;
     }
+
 }
 .hero {
     background-color: rgba(159, 173, 147, 0.7);
